@@ -9,7 +9,6 @@ var getElementsByClassName = function(className){
   var body = document.body;
 
   var repeat = function (current){
-    // console.log(current);
 
     /* Check to see if element is not text */
     if(typeof(current.classList) != 'undefined'){
@@ -29,6 +28,5 @@ var getElementsByClassName = function(className){
   
   repeat(body);
 
-  console.log('run test');
   return elements;
 };

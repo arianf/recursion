@@ -7,49 +7,40 @@
 var getElementsByClassName = function(className){
   
   var elements = [];
-  var body;
-  var current;
+  var body = document.body;
+  // var current;
 
-  var eval = function (){
-    if( typeof(body) == 'undefined' ){
-      body = document.body;
-      eval();
-    }else{
-      body = body.childNodes;
+  var eval = function (current){
+    
+    /* If current containts, push */
+    if(typeof(current.classList) != 'undefined'){
+      if(current.classList.contains(className)){
+        elements.push(current);
+      }
 
-      // body.childNodes[3].nodeName.toLowerCase()
-      for (var i = 0; i < body.length; i++) {
-        
-        console.log(i);
-
-
-        if(typeof(body[i].classList) != 'undefined'){
-          console.log(body[i]);
-          console.log(body[i].classList.contains(className));
-          if(body[i].classList.contains(className)){
-            console.log("TEST");
-            elements.push(body[i].nodeName.toLowerCase() + '.' + className);
-            console.log("TEST2");
-            console.log(elements);
-          }
-        }
-        //   for(var x = 0; x < body[i].childNodes[i].classList.length; x++){
-        //     if(body[i].childNodes[i].classList[x] == className){
-        //       elements.push(body.childNodes[i].nodeName.toLowerCase() + '.' + className);
-        //     }
-        //   }
-        // }
-        // if(body[i].childNodes[i].length != 0){
-        //   eval();
-        // }
+      current = current.childNodes;
+      for (var i = 0; i < current.length; i++) {
+        eval(current[i]);
       }
     }
+
+      // current = current.childNodes;
+
+      /* Cycle through current list, using current array length */
+      // for (var i = 0; i < current.length; i++) {
+
+        /* Check to see if element is not text */
+        // if(typeof(current[i].classList) != 'undefined'){
+
+          /* Check to see if elemnt containts className */
+          // if(current[i].classList.contains(className)){
+            // elements.push(current[i]);
+          // }
+          // eval(current[i]);
+        // }
+      // }
   }
-  eval();
-  console.log("END: ");
+  eval(body);
   console.log(elements);
   return elements;
-  // return ['body.targetClassName', 'p.targetClassName'];
-
-  // return array element.class
 };

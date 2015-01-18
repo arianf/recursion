@@ -13,16 +13,23 @@ var stringifyJSON = function(obj) {
   // }
   var stack = [];
   var repeat = function(current) {
-  	if(typeof(obj) === 'string'){
-  		stack.push('"'+obj+'"');
-  	}else if(isArray(obj)){
+  	if(typeof(current) === 'string'){
+  		stack.push('"'+current+'"');
+  	}else if(current == null){
+  		stack.push('null');
+  	}else if($.isArray(current)){
   		stack.push('[');
-  		for (var i = 0; i < obj.length; i++){
-  			repeat(obj[i]);
+  		for (var i = 0; i < current.length; i++){
+  			repeat(current[i]);
+  			if(current.length-1 != i){
+  				stack.push(',');
+  			}
   		}
   		stack.push(']');
+  	}else{
+  		stack.push(current);
   	}
   };
   repeat(obj);
-  return stack.join();
+  return stack.join("");
 };

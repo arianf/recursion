@@ -9,10 +9,16 @@ var stringifyJSON = function(obj) {
   var stack = [];
 
   var repeat = function(current) {
+
+    /* for string values */
     if(typeof(current) === 'string'){
       stack.push('"'+current+'"');
+    
+    /* for null values */
     }else if(current == null){
       stack.push('null');
+
+    /* for array values */
     }else if($.isArray(current)){
       stack.push('[');
       for (var i = 0; i < current.length; i++){
@@ -22,6 +28,8 @@ var stringifyJSON = function(obj) {
         }
       }
       stack.push(']');
+
+    /* for object values */
     }else if($.isPlainObject(current)){
       stack.push('{');
 
@@ -32,17 +40,21 @@ var stringifyJSON = function(obj) {
           stack.push(',');
         }
       }
+
+      /* pop if last array was a comma */
       if(stack[stack.length-1] == ','){
         stack.pop();
       }
 
       stack.push('}');
+
+    /* for everything else */
     }else{
       stack.push(current);
     }
   };
 
   repeat(obj);
-  
+
   return stack.join('');
 };

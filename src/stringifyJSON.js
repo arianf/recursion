@@ -14,7 +14,7 @@ var stringifyJSON = function(obj) {
   var stack = [];
   var repeat = function(current) {
   	if(typeof(obj) === 'string'){
-  		stack.push('"'.obj.'"');
+  		stack.push('"'+obj+'"');
   	}else if(isArray(obj)){
   		stack.push('[');
   		for (var i = 0; i < obj.length; i++){
@@ -23,5 +23,6 @@ var stringifyJSON = function(obj) {
   		stack.push(']');
   	}
   };
+  repeat(obj);
   return stack.join();
 };

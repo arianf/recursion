@@ -28,10 +28,13 @@ var stringifyJSON = function(obj) {
   		stack.push(']');
   	}else if($.isPlainObject(current)){
   		stack.push('{');
+
   		for(var prop in current){
-  			stack.push('"'+prop + '":');
-  			repeat(current[prop]);
-  			stack.push(',');
+  			if(typeof(current[prop]) != 'undefined' && typeof(current[prop]) != 'function'){
+	  			stack.push('"'+prop + '":');
+	  			repeat(current[prop]);
+	  			stack.push(',');
+	  		}
   		}
   		if(stack[stack.length-1] == ','){
   			stack.pop();

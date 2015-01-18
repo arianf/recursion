@@ -6,12 +6,8 @@
 var stringifyJSON = function(obj) {
   // your code goes here
   
-  // if(obj == null){
-  //   return "null";
-  // }else if(typeof(obj) == 'string' || typeof(obj)  == 'object'){
-  //   return '"'+obj.toString()+'"';
-  // }
   var stack = [];
+
   var repeat = function(current) {
     if(typeof(current) === 'string'){
       stack.push('"'+current+'"');
@@ -45,6 +41,8 @@ var stringifyJSON = function(obj) {
       stack.push(current);
     }
   };
+
   repeat(obj);
-  return stack.join("");
+  
+  return stack.join('');
 };
